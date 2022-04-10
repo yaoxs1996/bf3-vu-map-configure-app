@@ -1,7 +1,6 @@
-package main
+package data
 
 import (
-	"bf3/src/data"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -37,10 +36,20 @@ type Mode struct {
 	CaptureTheFlag      int `json:"CaptureTheFlag0"`
 }
 
-func main() {
-	maps = make(Maps)
+func Read(filePath string) *Maps {
+	jsonFile, err := os.Open(filePath)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	fmt.Println("Successfully read maps.json")
+	defer jsonFile.Close()
 
-	maps = data.Read("./maps.json")
+	byteValue, _ := ioutil.ReadAll(jsonFile)
 
-	fmt.Println(maps.Maps[0].SupportMode.CaptureTheFlag)
+	var maps Maps
+
+	json.Unmarshal(byteValue, &maps)
+
+	return &maps
 }
