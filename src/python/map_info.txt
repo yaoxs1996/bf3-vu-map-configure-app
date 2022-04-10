@@ -1,0 +1,29 @@
+image 	MP_001 	Grand Bazaar 	CQ Large ,CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	MP_003 	Teheran Highway 	CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Small ,Rush
+image 	MP_007 	Caspian Border 	CQ Large ,CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Large ,CQ Small
+image 	MP_011 	Seine Crossing 	CQ Large ,CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	MP_012 	Operation Firestorm 	CQ Large ,CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Large ,CQ Small
+image 	MP_013 	Damavand Peak 	CQ Large ,CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Large ,CQ Small
+image 	MP_017 	Noshahr Canals 	CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	MP_018 	Kharg Island 	CQ Large ,CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	MP_Subway 	Operation Metro 	CQ Large ,Rush ,SDM ,TDM ,TDM CQ 	
+image 	XP1_001 	Strike at Karkand 	Assault Large ,Assault ,Assault 2 ,Rush ,SDM ,TDM ,TDM CQ 	Assault Large ,Assault ,Assault 2
+image 	XP1_002 	Gulf of Oman 	Assault ,CQ Large ,CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Large ,CQ Small ,Rush
+image 	XP1_003 	Sharqi Peninsula 	Assault Large ,Assault ,Assault 2 ,Rush ,SDM ,TDM ,TDM CQ 	Assault ,Rush
+image 	XP1_004 	Wake Island 	Assault Large ,Assault ,Assault 2 ,SDM ,TDM ,TDM CQ 	Assault Large ,Assault 2
+image 	XP2_Factory 	Scrapmetal 	CQ Dom ,GM ,SDM ,TDM CQ 	
+image 	XP2_Office 	Operation 925 	CQ Dom ,GM ,SDM ,TDM CQ 	
+image 	XP2_Skybar 	Ziba Tower 	CQ Dom ,GM ,SDM ,TDM CQ 	
+image 	XP2_Palace 	Donya Fortress 	CQ Dom ,GM ,SDM ,TDM CQ 	
+image 	XP3_Alborz 	Alborz Mountains 	CQ Large ,CQ Small ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	XP3_Desert 	Bandar Desert 	CQ Small ,SDM ,Tank Superiority ,TDM ,TDM CQ 	CQ Small ,Tank Superiority
+image 	XP3_Shield 	Armored Shield 	CQ Large ,CQ Small ,SDM ,TDM ,TDM CQ 	CQ Large ,CQ Small
+image 	XP3_Valley 	Death Valley 	CQ Small ,SDM ,Tank Superiority ,TDM ,TDM CQ 	CQ Small ,Tank Superiority
+image 	XP4_FD 	Markaz Monolith 	CQ Large ,CQ Small ,GM ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	XP4_Rubble 	Talah Market 	Assault ,GM ,SDM ,SQ Rush ,TDM ,TDM CQ 	Assault
+image 	XP4_Quake 	Epicenter 	CQ Large ,CQ Small ,GM ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	XP4_Parl 	Azadi Palace 	CQ Large ,CQ Small ,GM ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	XP5_001 	Operation Riverside 	CQ Large ,CQ Small ,SDM ,TDM ,TDM CQ 	CQ Large ,CQ Small
+image 	XP5_002 	Nebandan Flats 	CQ Small ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	XP5_003 	Kiasar Railroad 	CTF ,CQ Small ,SDM ,TDM ,TDM CQ 	CQ Small
+image 	XP5_004 	Sabalan Pipeline 	CQ Large ,CQ Small ,Rush ,SDM ,TDM ,TDM CQ 	CQ Large ,CQ Small ,Rush
