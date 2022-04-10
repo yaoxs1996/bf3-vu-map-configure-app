@@ -2,10 +2,7 @@ package main
 
 import (
 	"bf3/src/data"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"os"
 )
 
 // Definition of map info json
