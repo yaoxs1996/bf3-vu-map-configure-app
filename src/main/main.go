@@ -2,11 +2,8 @@ package main
 
 import (
 	"bf3/src/data"
+	"bf3/src/gui"
 	"fmt"
-
-	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/widget"
 )
 
 func main() {
@@ -15,16 +12,7 @@ func main() {
 
 	fmt.Println(maps.Maps[0].SupportMode)
 
-	a := app.New()
-	w := a.NewWindow("Hello")
+	myWindow := gui.App()
 
-	hello := widget.NewLabel("Hello Fyne!")
-	w.SetContent(container.NewVBox(
-		hello,
-		widget.NewButton("Hi!", func() {
-			hello.SetText("Welcome: ")
-		}),
-	))
-
-	w.ShowAndRun()
+	myWindow.ShowAndRun()
 }
