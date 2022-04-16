@@ -63,7 +63,7 @@ def abbrToGM(abbr: str):
 
 def main(input_name: str):
     map_info = pd.read_csv(input_name, sep="\t", header=None)
-    map_json = {"maps": []}
+    map_json = {}
 
     for index, row in map_info.iterrows():
         support_gm = row[3]
@@ -84,7 +84,7 @@ def main(input_name: str):
         one_map["cn_name"] = name_translate[map_name]
         one_map["support_mode"] = mode
 
-        map_json["maps"].append(one_map)
+        map_json[tech_name] = one_map
 
     with open("./map.json", "w") as file_obj:
         json.dump(map_json, file_obj, indent=4)
