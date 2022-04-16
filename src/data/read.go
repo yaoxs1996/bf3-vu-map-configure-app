@@ -8,10 +8,6 @@ import (
 )
 
 // Definition of map info json
-type Maps struct {
-	Maps []Map `json:"maps"`
-}
-
 type Map struct {
 	TechName    string `json:"tech_name"`
 	Name        string `json:"name"`
@@ -36,7 +32,7 @@ type Mode struct {
 	CaptureTheFlag      int `json:"CaptureTheFlag0"`
 }
 
-func Read(filePath string) *Maps {
+func Read(filePath string) map[string]Map {
 	jsonFile, err := os.Open(filePath)
 	if err != nil {
 		fmt.Println(err)
@@ -47,9 +43,9 @@ func Read(filePath string) *Maps {
 
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 
-	var maps Maps
+	var maps map[string]Map
 
 	json.Unmarshal(byteValue, &maps)
 
-	return &maps
+	return maps
 }
