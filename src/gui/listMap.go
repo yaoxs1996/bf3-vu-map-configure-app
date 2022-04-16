@@ -37,6 +37,7 @@ func ListMap() *widget.List {
 		info := strings.Split(scanner.Text(), " ")
 		mapInfo := make(map[string]string)
 		mapInfo["name"] = maps[info[0]].Name
+		mapInfo["techName"] = string(info[0])
 		mapInfo["mode"] = string(info[1])
 		mapInfo["round"] = string(info[2])
 		curMapList = append(curMapList, mapInfo)
@@ -94,9 +95,8 @@ func ListMap() *widget.List {
 		},
 		func(i widget.ListItemID, o fyne.CanvasObject) {
 			o.(*fyne.Container).Objects[0].(*widget.Label).SetText(curMapList[i]["name"])
-			var options []string = []string{"TDM", "2"}
-			o.(*fyne.Container).Objects[1].(*widget.SelectEntry).SetOptions(options)
-			o.(*fyne.Container).Objects[2].(*widget.Entry).SetText("1")
+			o.(*fyne.Container).Objects[1].(*widget.SelectEntry).SetOptions(supportModes[curMapList[i]["techName"]])
+			o.(*fyne.Container).Objects[2].(*widget.Entry).SetText(curMapList[i]["round"])
 		})
 
 	return list
