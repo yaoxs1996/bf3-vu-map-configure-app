@@ -41,6 +41,8 @@ func ListMap() *widget.List {
 		},
 		func(i widget.ListItemID, o fyne.CanvasObject) {
 			o.(*widget.Label).SetText(t[i])
+			o.(*widget.Label).SetText("模式")
+			o.(*widget.Label).SetText("回合数")
 		})
 
 	return list
