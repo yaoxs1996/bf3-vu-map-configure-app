@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"reflect"
 	"strings"
 
 	"fyne.io/fyne/v2"
@@ -39,12 +40,41 @@ func ListMap() *widget.List {
 		mapInfo["mode"] = string(info[1])
 		mapInfo["round"] = string(info[2])
 		curMapList = append(curMapList, mapInfo)
-		fmt.Println("map name: " + maps[info[0]].Name + " gamemode: " + info[1] + " round: " + info[2])
+		// fmt.Println("map name: " + maps[info[0]].Name + " gamemode: " + info[1] + " round: " + info[2])
 		// fmt.Println(len(info))
 		nlines += 1
 	}
 
-	fmt.Println(curMapList)
+	// fmt.Println(curMapList)
+
+	supportModes := make(map[string][]string)
+
+	for key, value := range maps {
+		modes := value.SupportMode
+		modeValue := reflect.ValueOf(modes)   // 反射获得的模式支持数值
+		modeFullName := reflect.TypeOf(modes) // 反射获得的模式名称
+
+		modeList := []string{}
+		for i := 0; i < modeValue.NumField(); i++ {
+			// fmt.Println(modeFullName.Field(i).Name) // 模式正式名称
+			// fmt.Println(modeValue.Field(i))         // 模式对应数值
+
+			if modeValue.Field(i).Int() > 0 {
+				curName := modeFullName.Field(i).Name
+				// 获得json字段对应名称
+				if techName, ok := modeFullName.FieldByName(curName); ok {
+					modeList = append(modeList, techName.Tag.Get("json"))
+				}
+			}
+			// modeName := nmodes.Field(i).Name
+			// if txtType, ok := nmodes.FieldByName(modeName); ok {
+			// 	fmt.Println(txtType.Tag.Get("json"))
+			// }
+		}
+		supportModes[key] = modeList
+	}
+
+	fmt.Println(supportModes)
 
 	list := widget.NewList(
 		func() int {
@@ -66,7 +96,7 @@ func ListMap() *widget.List {
 			o.(*fyne.Container).Objects[0].(*widget.Label).SetText(curMapList[i]["name"])
 			var options []string = []string{"TDM", "2"}
 			o.(*fyne.Container).Objects[1].(*widget.SelectEntry).SetOptions(options)
-			o.(*fyne.Container).Objects[2].(*widget.Entry).SetText("round")
+			o.(*fyne.Container).Objects[2].(*widget.Entry).SetText("1")
 		})
 
 	return list
