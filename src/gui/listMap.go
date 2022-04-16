@@ -1,6 +1,7 @@
 package gui
 
 import (
+	"bf3/src/data"
 	"bufio"
 	"fmt"
 	"os"
@@ -10,7 +11,7 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-var data = []string{"a", "string", "list"}
+var t = []string{"a", "string", "list"}
 
 func ListMap() *widget.List {
 	f, err := os.Open("D:\\PC\\Documents\\Battlefield 3\\Server\\Admin\\MapList.txt")
@@ -23,21 +24,23 @@ func ListMap() *widget.List {
 
 	scanner := bufio.NewScanner(f)
 
+	maps := data.Read("./maps.json")
+
 	for scanner.Scan() {
 		info := strings.Split(scanner.Text(), " ")
-		fmt.Println("map name: " + info[0] + " gamemode: " + info[1] + " round: " + info[2])
+		fmt.Println("map name: " + maps[info[0]].CnName + " gamemode: " + info[1] + " round: " + info[2])
 		// fmt.Println(len(info))
 	}
 
 	list := widget.NewList(
 		func() int {
-			return len(data)
+			return len(t)
 		},
 		func() fyne.CanvasObject {
 			return widget.NewLabel("template")
 		},
 		func(i widget.ListItemID, o fyne.CanvasObject) {
-			o.(*widget.Label).SetText(data[i])
+			o.(*widget.Label).SetText(t[i])
 		})
 
 	return list
