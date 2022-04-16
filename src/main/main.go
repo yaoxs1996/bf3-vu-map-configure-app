@@ -4,6 +4,8 @@ import (
 	"bf3/src/data"
 	"bf3/src/gui"
 	"fmt"
+
+	"fyne.io/fyne/v2"
 )
 
 func main() {
@@ -12,6 +14,7 @@ func main() {
 	fmt.Println(maps["MP_017"].CnName)
 
 	myWindow := gui.App()
+	myWindow.Resize(fyne.NewSize(400, 600))
 
 	myWindow.ShowAndRun()
 }
