@@ -14,7 +14,7 @@ func main() {
 	fmt.Println(maps["MP_017"].CnName)
 
 	myWindow := gui.App()
-	myWindow.Resize(fyne.NewSize(400, 600))
+	myWindow.Resize(fyne.NewSize(600, 800))
 
 	myWindow.ShowAndRun()
 }
