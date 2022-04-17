@@ -15,10 +15,11 @@ import (
 )
 
 var maps map[string]data.Map = data.Read("./maps.json")
+var curMapModeList []map[string]string
 
 func ListMap() *widget.List {
-	curMapList := GetCurrentMapList()
-	nlines := len(curMapList)
+	curMapList := GetFileMapList()
+	curMapModeList = curMapList
 
 	supportModes := GetSupportModes()
 
@@ -26,7 +27,7 @@ func ListMap() *widget.List {
 
 	list := widget.NewList(
 		func() int {
-			return nlines
+			return len(curMapModeList)
 		},
 		func() fyne.CanvasObject {
 			mapName := widget.NewLabel("blank")
@@ -37,17 +38,17 @@ func ListMap() *widget.List {
 			return content
 		},
 		func(i widget.ListItemID, o fyne.CanvasObject) {
-			o.(*fyne.Container).Objects[0].(*widget.Label).SetText(curMapList[i]["name"])
+			o.(*fyne.Container).Objects[0].(*widget.Label).SetText(curMapModeList[i]["name"])
 			// o.(*fyne.Container).Objects[1].(*widget.SelectEntry).SetOptions(supportModes[curMapList[i]["techName"]])
-			o.(*fyne.Container).Objects[1].(*widget.Select).Options = supportModes[curMapList[i]["techName"]]
-			o.(*fyne.Container).Objects[1].(*widget.Select).SetSelected(curMapList[i]["mode"])
-			o.(*fyne.Container).Objects[2].(*widget.Entry).SetText(curMapList[i]["round"])
+			o.(*fyne.Container).Objects[1].(*widget.Select).Options = supportModes[curMapModeList[i]["techName"]]
+			o.(*fyne.Container).Objects[1].(*widget.Select).SetSelected(curMapModeList[i]["mode"])
+			o.(*fyne.Container).Objects[2].(*widget.Entry).SetText(curMapModeList[i]["round"])
 		})
 
 	return list
 }
 
-func GetCurrentMapList() []map[string]string {
+func GetFileMapList() []map[string]string {
 	// f, err := os.Open("D:\\PC\\Documents\\Battlefield 3\\Server\\Admin\\MapList.txt")
 	f, err := os.Open("C:\\Users\\Infin\\Documents\\Battlefield 3\\Server\\Admin\\MapList.txt")
 
@@ -59,7 +60,7 @@ func GetCurrentMapList() []map[string]string {
 
 	scanner := bufio.NewScanner(f)
 
-	var curMapList []map[string]string
+	var fileMapList []map[string]string
 
 	for scanner.Scan() {
 		info := strings.Split(scanner.Text(), " ")
@@ -68,14 +69,24 @@ func GetCurrentMapList() []map[string]string {
 		mapInfo["techName"] = string(info[0])
 		mapInfo["mode"] = string(info[1])
 		mapInfo["round"] = string(info[2])
-		curMapList = append(curMapList, mapInfo)
+		fileMapList = append(fileMapList, mapInfo)
 	}
 
-	return curMapList
+	return fileMapList
 }
 
-func UpdateMapList(list *widget.List) {
+func UpdateMapList(mapName string) {
+	mapInfo := make(map[string]string)
+	mapInfo["name"] = maps[fullMapDict[mapName]].Name
+	mapInfo["techName"] = maps[mapName].TechName
+	mapInfo["mode"] = ""
+	mapInfo["round"] = "1"
 
+	tempList := []map[string]string{}
+	tempList = append(tempList, mapInfo)
+	curMapModeList = append(tempList, curMapModeList...)
+	fmt.Println("In update", tempList)
+	fmt.Println("In updata, mapInfo", mapInfo, mapName)
 }
 
 func GetSupportModes() map[string][]string {

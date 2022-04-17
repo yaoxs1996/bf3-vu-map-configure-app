@@ -9,10 +9,11 @@ import (
 )
 
 var curSelectedMapName string
+var fullMapDict map[string]string = make(map[string]string)
 
 func CreateAddContainer() *fyne.Container {
 	maps := data.Read("./maps.json")
-	fullMapDict := make(map[string]string) // key: 完整名称, value: tech_name
+	// fullMapDict := make(map[string]string) // key: 完整名称, value: tech_name
 	fullMapName := []string{}
 	for key, value := range maps {
 		fullMapDict[value.Name] = key
@@ -20,7 +21,7 @@ func CreateAddContainer() *fyne.Container {
 	}
 
 	optionalMap := widget.NewSelect(fullMapName, changedHandler)
-	btnAddNewMap := widget.NewButton("Add", func() {})
+	btnAddNewMap := widget.NewButton("Add", tapHandler)
 	container := container.NewGridWithColumns(2, optionalMap, btnAddNewMap)
 
 	return container
@@ -32,6 +33,6 @@ func changedHandler(value string) {
 
 func tapHandler() {
 	if len(curSelectedMapName) != 0 {
-
+		UpdateMapList(curSelectedMapName)
 	}
 }

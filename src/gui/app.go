@@ -26,7 +26,10 @@ func App() fyne.Window {
 	// showCard := widget.NewCard("Map and mode", "Current", list)
 
 	// 装配
-	btn := widget.NewButton("123", func() {})
+	btn := widget.NewButton("123", func() {
+		list.Refresh()
+		// fmt.Println(curMapModeList)
+	})
 	myWindow.SetContent(container.NewGridWithRows(2, list, container.NewVBox(addContainer, btn)))
 
 	return myWindow
