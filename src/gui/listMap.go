@@ -75,7 +75,7 @@ func ListMap() *widget.List {
 		supportModes[key] = modeList
 	}
 
-	fmt.Println(supportModes)
+	// fmt.Println(supportModes)
 
 	list := widget.NewList(
 		func() int {
@@ -83,19 +83,17 @@ func ListMap() *widget.List {
 		},
 		func() fyne.CanvasObject {
 			mapName := widget.NewLabel("blank")
-			mode := widget.NewSelectEntry([]string{})
+			mode := widget.NewSelect([]string{}, func(value string) {})
 			round := widget.NewEntry()
-
-			// mapName.Resize(fyne.NewSize(200, 20))
-			// mode.Resize(fyne.NewSize(50, 20))
-			// round.Resize(fyne.NewSize(50, 20))
 
 			content := container.New(layout.NewGridLayout(3), mapName, mode, round)
 			return content
 		},
 		func(i widget.ListItemID, o fyne.CanvasObject) {
 			o.(*fyne.Container).Objects[0].(*widget.Label).SetText(curMapList[i]["name"])
-			o.(*fyne.Container).Objects[1].(*widget.SelectEntry).SetOptions(supportModes[curMapList[i]["techName"]])
+			// o.(*fyne.Container).Objects[1].(*widget.SelectEntry).SetOptions(supportModes[curMapList[i]["techName"]])
+			o.(*fyne.Container).Objects[1].(*widget.Select).Options = supportModes[curMapList[i]["techName"]]
+			o.(*fyne.Container).Objects[1].(*widget.Select).SetSelected(curMapList[i]["mode"])
 			o.(*fyne.Container).Objects[2].(*widget.Entry).SetText(curMapList[i]["round"])
 		})
 
