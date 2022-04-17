@@ -8,6 +8,8 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+var curSelectedMapName string
+
 func CreateAddContainer() *fyne.Container {
 	maps := data.Read("./maps.json")
 	fullMapDict := make(map[string]string) // key: 完整名称, value: tech_name
@@ -17,9 +19,19 @@ func CreateAddContainer() *fyne.Container {
 		fullMapName = append(fullMapName, value.Name)
 	}
 
-	optionalMap := widget.NewSelect(fullMapName, func(valus string) {})
+	optionalMap := widget.NewSelect(fullMapName, changedHandler)
 	btnAddNewMap := widget.NewButton("Add", func() {})
 	container := container.NewGridWithColumns(2, optionalMap, btnAddNewMap)
 
 	return container
+}
+
+func changedHandler(value string) {
+	curSelectedMapName = value
+}
+
+func tapHandler() {
+	if len(curSelectedMapName) != 0 {
+
+	}
 }

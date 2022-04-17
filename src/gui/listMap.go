@@ -14,37 +14,13 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+var maps map[string]data.Map = data.Read("./maps.json")
+
 func ListMap() *widget.List {
 	curMapList := GetCurrentMapList()
 	nlines := len(curMapList)
-	maps := data.Read("./maps.json")
 
-	supportModes := make(map[string][]string)
-
-	for key, value := range maps {
-		modes := value.SupportMode
-		modeValue := reflect.ValueOf(modes)   // 反射获得的模式支持数值
-		modeFullName := reflect.TypeOf(modes) // 反射获得的模式名称
-
-		modeList := []string{}
-		for i := 0; i < modeValue.NumField(); i++ {
-			// fmt.Println(modeFullName.Field(i).Name) // 模式正式名称
-			// fmt.Println(modeValue.Field(i))         // 模式对应数值
-
-			if modeValue.Field(i).Int() > 0 {
-				curName := modeFullName.Field(i).Name
-				// 获得json字段对应名称
-				if techName, ok := modeFullName.FieldByName(curName); ok {
-					modeList = append(modeList, techName.Tag.Get("json"))
-				}
-			}
-			// modeName := nmodes.Field(i).Name
-			// if txtType, ok := nmodes.FieldByName(modeName); ok {
-			// 	fmt.Println(txtType.Tag.Get("json"))
-			// }
-		}
-		supportModes[key] = modeList
-	}
+	supportModes := GetSupportModes()
 
 	// fmt.Println(supportModes)
 
@@ -83,8 +59,6 @@ func GetCurrentMapList() []map[string]string {
 
 	scanner := bufio.NewScanner(f)
 
-	maps := data.Read("./maps.json")
-
 	var curMapList []map[string]string
 
 	for scanner.Scan() {
@@ -98,4 +72,39 @@ func GetCurrentMapList() []map[string]string {
 	}
 
 	return curMapList
+}
+
+func UpdateMapList(list *widget.List) {
+
+}
+
+func GetSupportModes() map[string][]string {
+	supportModes := make(map[string][]string)
+
+	for key, value := range maps {
+		modes := value.SupportMode
+		modeValue := reflect.ValueOf(modes)   // 反射获得的模式支持数值
+		modeFullName := reflect.TypeOf(modes) // 反射获得的模式名称
+
+		modeList := []string{}
+		for i := 0; i < modeValue.NumField(); i++ {
+			// fmt.Println(modeFullName.Field(i).Name) // 模式正式名称
+			// fmt.Println(modeValue.Field(i))         // 模式对应数值
+
+			if modeValue.Field(i).Int() > 0 {
+				curName := modeFullName.Field(i).Name
+				// 获得json字段对应名称
+				if techName, ok := modeFullName.FieldByName(curName); ok {
+					modeList = append(modeList, techName.Tag.Get("json"))
+				}
+			}
+			// modeName := nmodes.Field(i).Name
+			// if txtType, ok := nmodes.FieldByName(modeName); ok {
+			// 	fmt.Println(txtType.Tag.Get("json"))
+			// }
+		}
+		supportModes[key] = modeList
+	}
+
+	return supportModes
 }
