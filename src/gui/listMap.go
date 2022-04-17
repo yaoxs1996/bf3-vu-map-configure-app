@@ -14,39 +14,10 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-var t = []string{"a", "string", "list"}
-
 func ListMap() *widget.List {
-	// f, err := os.Open("D:\\PC\\Documents\\Battlefield 3\\Server\\Admin\\MapList.txt")
-	f, err := os.Open("C:\\Users\\Infin\\Documents\\Battlefield 3\\Server\\Admin\\MapList.txt")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	defer f.Close()
-
-	scanner := bufio.NewScanner(f)
-
+	curMapList := GetCurrentMapList()
+	nlines := len(curMapList)
 	maps := data.Read("./maps.json")
-
-	var curMapList []map[string]string
-	var nlines int = 0
-
-	for scanner.Scan() {
-		info := strings.Split(scanner.Text(), " ")
-		mapInfo := make(map[string]string)
-		mapInfo["name"] = maps[info[0]].Name
-		mapInfo["techName"] = string(info[0])
-		mapInfo["mode"] = string(info[1])
-		mapInfo["round"] = string(info[2])
-		curMapList = append(curMapList, mapInfo)
-		// fmt.Println("map name: " + maps[info[0]].Name + " gamemode: " + info[1] + " round: " + info[2])
-		// fmt.Println(len(info))
-		nlines += 1
-	}
-
-	// fmt.Println(curMapList)
 
 	supportModes := make(map[string][]string)
 
@@ -98,4 +69,33 @@ func ListMap() *widget.List {
 		})
 
 	return list
+}
+
+func GetCurrentMapList() []map[string]string {
+	// f, err := os.Open("D:\\PC\\Documents\\Battlefield 3\\Server\\Admin\\MapList.txt")
+	f, err := os.Open("C:\\Users\\Infin\\Documents\\Battlefield 3\\Server\\Admin\\MapList.txt")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer f.Close()
+
+	scanner := bufio.NewScanner(f)
+
+	maps := data.Read("./maps.json")
+
+	var curMapList []map[string]string
+
+	for scanner.Scan() {
+		info := strings.Split(scanner.Text(), " ")
+		mapInfo := make(map[string]string)
+		mapInfo["name"] = maps[info[0]].Name
+		mapInfo["techName"] = string(info[0])
+		mapInfo["mode"] = string(info[1])
+		mapInfo["round"] = string(info[2])
+		curMapList = append(curMapList, mapInfo)
+	}
+
+	return curMapList
 }
